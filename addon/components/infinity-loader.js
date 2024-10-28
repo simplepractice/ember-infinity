@@ -129,8 +129,10 @@ const InfinityLoaderComponent = Component.extend({
     onExit(instance.didExitViewport.bind(instance));
   },
 
-  willDestroy() {
+  willDestroyElement() {
     this._cancelTimers();
+
+    this.inViewport.stopWatching(this.elem);
 
     get(this, 'infinityModelContent')
       .then((infinityModel) => {
